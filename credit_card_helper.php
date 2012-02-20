@@ -27,7 +27,13 @@ function credit_card_determiner($cardno)
 			
 	if ($cardno_len < 13 OR $cardno_len > 16 OR !is_numeric($cardno))
 	{
-		return $cardname;
+		return 'Invalid card number';
+	}
+	
+	//Luhn check
+	if (!validLuhn($cardno))
+	{
+		return 'Invalid card number';
 	}
 	
 	// what kind of card?
@@ -97,4 +103,16 @@ function credit_card_determiner($cardno)
 	
 
 	return $cardname;
+}
+
+/* thanks to Greg Knapp at:
+	http://gregk.me/2011/php-implementation-of-bank-card-luhn-algorithm/
+*/
+
+function validLuhn($number) {
+    for ($sum = 0, $i = strlen($number) - 1; $i >= 0; $i--) {
+        $digit = (int) $number[$i];
+        $sum += (($i % 2) === 0) ? array_sum(str_split($digit * 2)) : $digit;
+    }
+    return (($sum % 10) === 0);
 }
