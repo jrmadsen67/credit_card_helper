@@ -105,14 +105,37 @@ function credit_card_determiner($cardno)
 	return $cardname;
 }
 
-/* thanks to Greg Knapp at:
-	http://gregk.me/2011/php-implementation-of-bank-card-luhn-algorithm/
+
+
+/*
+Copyright (c) 2008, reusablecode.blogspot.com; some rights reserved.
+
+This work is licensed under the Creative Commons Attribution License. To view
+a copy of this license, visit http://creativecommons.org/licenses/by/3.0/ or
+send a letter to Creative Commons, 559 Nathan Abbott Way, Stanford, California
+94305, USA.
 */
 
-function validLuhn($number) {
-    for ($sum = 0, $i = strlen($number) - 1; $i >= 0; $i--) {
-        $digit = (int) $number[$i];
-        $sum += (($i % 2) === 0) ? array_sum(str_split($digit * 2)) : $digit;
-    }
-    return (($sum % 10) === 0);
+// Luhn (mod 10) algorithm
+
+function _validLuhn($input)
+{
+   $sum = 0;
+   $odd = strlen($input) % 2;
+    
+   // Remove any non-numeric characters.
+   if (!is_numeric($input))
+   {
+       eregi_replace("D", "", $input);
+   }
+    
+   // Calculate sum of digits.
+   for($i = 0; $i < strlen($input); $i++)
+   {
+       $sum += $odd ? $input[$i] : (($input[$i] * 2 > 9) ? $input[$i] * 2 - 9 : $input[$i] * 2);
+       $odd = !$odd;
+   }
+    
+   // Check validity.
+   return ($sum % 10 == 0) ? true : false;
 }
