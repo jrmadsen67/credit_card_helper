@@ -1,9 +1,5 @@
 <?php 
 
-
-function credit_card_determiner($cardno)
-{
-
 /*
 
 '*CARD TYPES            *PREFIX           *WIDTH
@@ -18,6 +14,10 @@ function credit_card_determiner($cardno)
 'Visa                   4                 13, 16
 
 */
+
+function credit_card_determiner($cardno)
+{
+
 
 	$cardname = 'Unknown';
 	
