@@ -118,7 +118,7 @@ send a letter to Creative Commons, 559 Nathan Abbott Way, Stanford, California
 
 // Luhn (mod 10) algorithm
 
-function _validLuhn($input)
+function validLuhn($input)
 {
    $sum = 0;
    $odd = strlen($input) % 2;
