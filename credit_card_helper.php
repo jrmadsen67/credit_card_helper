@@ -19,7 +19,7 @@ function credit_card_determiner($cardno)
 {
 
 
-	$cardname = 'Unknown';
+	$cardname = false;
 	
 	$cardno = str_replace(array("-"," "), array("",""),$cardno);
 
@@ -27,13 +27,13 @@ function credit_card_determiner($cardno)
 			
 	if ($cardno_len < 13 OR $cardno_len > 16 OR !is_numeric($cardno))
 	{
-		return 'Invalid card number';
+		return $cardname;
 	}
 	
 	//Luhn check
 	if (!validLuhn($cardno))
 	{
-		return 'Invalid card number';
+		return $cardname;
 	}
 	
 	// what kind of card?

@@ -22,7 +22,7 @@ assert_options(ASSERT_CALLBACK, 'my_assert_handler');
 // http://www.darkcoding.net/credit-card-numbers/
 
 $test_array = array(
-	array('Unknown','123456789012345'),
+	array(false,'123456789012345'),
 	array('American Express','123456789012345'), //wrong start - fail
 	array('American Express','375685299351549'), //pass
 	array('American Express','379319313296201'), //pass	
